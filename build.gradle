@@ -2,8 +2,12 @@ plugins {
     id 'java'
 }
 
+ext {
+    gitVersion = 'git describe --tags --match=v* --always --dirty'.execute().text.trim().substring(1)
+}
+
 group = 'com.lukaos187'
-version = '1.19-1.0.0'
+version = "1.15.2-${project.ext.gitVersion}"
 
 repositories {
     mavenCentral()
