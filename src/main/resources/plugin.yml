@@ -1,0 +1,24 @@
+name: BetterClear
+version: '${version}'
+main: com.lukaos187.betterclear.BetterClear
+api-version: '1.15'
+commands:
+  betterClear:
+    description: Clears the players inventory with the given options.
+    usage: /betterClear <name> <typeToClear> <placeToClear>
+permissions:
+  betterclear.clear:
+      description: Allows a player to clear an inventory.
+      default: true
+  betterclear.clear.hotbar:
+    description: Allows clearing other players' hotbars.
+    default: op
+  betterclear.clear.armour:
+    description: Allows clearing other players' armour slots.
+    default: op
+  betterclear.clear.inventory:
+    description: Allows clearing other players' inventory space (no hotbar or armour slots).
+    default: op
+  betterclear.clear.all:
+    description: Allows clearing other players' inventory completely.
+    default: op
