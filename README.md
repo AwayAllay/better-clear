@@ -18,7 +18,7 @@ allowing administrators to clear players' inventories with precision by category
     - Armor Slots
     - Offhand
     - Everything  
-- **Tested versions**: 1.15 - 1-21
+- **Tested versions**: 1.15 - 1-20.1
 
 ## Installation
 

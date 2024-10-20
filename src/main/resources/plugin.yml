@@ -25,3 +25,6 @@ permissions:
   betterclear.clear.all:
     description: Allows clearing other players' inventory completely.
     default: op
+  betterclear.clear.everyone:
+    description: Allows clearing everyone on the server.
+    default: op

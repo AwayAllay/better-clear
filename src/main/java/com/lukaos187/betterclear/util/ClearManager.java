@@ -19,6 +19,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -43,16 +44,26 @@ enum SLOTS{
 public class ClearManager {
 
     private final Player sender;
-    private final Player target;
+    private final List<Player> targets;
     private final String typeToClear;
     private final String placeToClear;
     private List<Integer> slotsToClear;
 
     public ClearManager(String[] args, Player sender) {
         this.sender = sender;
-        this.target = Bukkit.getPlayer(args[0]);
+        targets = addTargets(args);
         this.typeToClear = args[1];
         this.placeToClear = args[2];
+    }
+
+    /**Adds all the targets to the targets list.*/
+    private List<Player> addTargets(String[] args) {
+        if (args[0].equalsIgnoreCase("*")){
+           return new ArrayList<>(Bukkit.getOnlinePlayers());
+        }
+        else {
+           return Arrays.asList(Bukkit.getPlayer(args[0]));
+        }
     }
 
     /**Clears the players inventory based on the command arguments*/
@@ -73,43 +84,50 @@ public class ClearManager {
             clearItems();
         }
         else {
-            target.getInventory().clear();
-            sender.sendMessage(ChatColor.GRAY + "The inventory of " + ChatColor.WHITE + target.getName() + ChatColor.GRAY + " has been cleared.");
+            targets.forEach(target -> target.getInventory().clear());
         }
 
+        if (targets.size() > 1){
+            sender.sendMessage(ChatColor.GRAY + placeToClear.toUpperCase() + " of " + ChatColor.WHITE + "everyone " + ChatColor.GRAY + "has been cleared of " + ChatColor.WHITE + typeToClear + ChatColor.GRAY + ".");
+        }else {
+            sender.sendMessage(ChatColor.GRAY + placeToClear.toUpperCase() + " of " + ChatColor.WHITE + targets.get(0).getName() + ChatColor.GRAY + " has been cleared of " + ChatColor.WHITE + typeToClear + ChatColor.GRAY + ".");
+        }
     }
 
 
     /**Clears all the items that are not armour, blocks or tools from the given slots.*/
     private void clearItems() {
-        slotsToClear.forEach(slot -> {
 
-            ItemStack item = target.getInventory().getItem(slot);
-            if (item != null && !isTool(item.getType()) && !isArmor(item.getType()) && !item.getType().isBlock()){
+        targets.forEach(target -> {
 
-                target.getInventory().clear(slot);
+            slotsToClear.forEach(slot -> {
 
-            }
+                ItemStack item = target.getInventory().getItem(slot);
+                if (item != null && !isTool(item.getType()) && !isArmor(item.getType()) && !item.getType().isBlock()){
+
+                    target.getInventory().clear(slot);
+
+                }
+            });
+
         });
-
-        sender.sendMessage(ChatColor.GRAY + "All the items(not armour, tools or blocks) have been removed from " + ChatColor.WHITE + target.getName()
-                + ChatColor.GRAY + ".");
     }
 
     /**Clears all the tools from the given slots.*/
     private void clearTools() {
-        slotsToClear.forEach(slot -> {
 
-            ItemStack item = target.getInventory().getItem(slot);
-            if (item != null && isTool(item.getType())){
+        targets.forEach(target -> {
 
-                target.getInventory().clear(slot);
+            slotsToClear.forEach(slot -> {
 
-            }
+                ItemStack item = target.getInventory().getItem(slot);
+                if (item != null && isTool(item.getType())) {
+
+                    target.getInventory().clear(slot);
+
+                }
+            });
         });
-
-        sender.sendMessage(ChatColor.GRAY + "All the tools have been removed from " + ChatColor.WHITE + target.getName()
-                + ChatColor.GRAY + ".");
     }
 
     /**Tests if the Material is a tool*/
@@ -123,18 +141,20 @@ public class ClearManager {
 
     /**Clears all the armour from the given slots.*/
     private void clearArmor() {
-        slotsToClear.forEach(slot -> {
 
-            ItemStack item = target.getInventory().getItem(slot);
-            if (item != null && isArmor(item.getType())){
+        targets.forEach(target -> {
 
-                target.getInventory().clear(slot);
+            slotsToClear.forEach(slot -> {
 
-            }
+                ItemStack item = target.getInventory().getItem(slot);
+                if (item != null && isArmor(item.getType())){
+
+                    target.getInventory().clear(slot);
+
+                }
+            });
+
         });
-
-        sender.sendMessage(ChatColor.GRAY + "All the armour has been removed from " + ChatColor.WHITE + target.getName()
-                + ChatColor.GRAY + ".");
     }
 
     /**Tests if the Material is an armour-piece*/
@@ -147,18 +167,21 @@ public class ClearManager {
 
     /**Clears all the blocks from the given slots.*/
     private void clearBlocks() {
-        slotsToClear.forEach(slot -> {
 
-            ItemStack item = target.getInventory().getItem(slot);
-            if (item != null && item.getType().isBlock()){
+        targets.forEach(target -> {
 
-                target.getInventory().clear(slot);
+            slotsToClear.forEach(slot -> {
 
-            }
+                ItemStack item = target.getInventory().getItem(slot);
+                if (item != null && item.getType().isBlock()){
+
+                    target.getInventory().clear(slot);
+
+                }
+            });
+
         });
 
-        sender.sendMessage(ChatColor.GRAY + "All the blocks have been removed from " + ChatColor.WHITE + target.getName()
-                + ChatColor.GRAY + ".");
     }
 
     /**Returns the slots which have to be cleared.*/

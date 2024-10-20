@@ -59,6 +59,10 @@ public class Clear implements TabExecutor {
             if (Objects.equals(Bukkit.getPlayer(args[0]), player)){
                 return true;
             }
+            else if (args[0].equalsIgnoreCase("*") &&
+                    player.hasPermission("betterclear.clear.everyone")) {
+                return true;
+            }
             else if (player.hasPermission("betterclear.clear.hotbar") &&
                     args[2].equalsIgnoreCase("hotbar")) {
                 return true;
@@ -96,8 +100,12 @@ public class Clear implements TabExecutor {
     private boolean checkForNull(String[] args, Player player) {
 
         if (args.length == 0 || args[0] == null || Bukkit.getPlayer(args[0]) == null){
-            player.sendMessage(ChatColor.GRAY + "Please provide a valid player to clear.");
-            return false;
+
+            if (args[0] != null && !args[0].equalsIgnoreCase("*")){
+
+                player.sendMessage(ChatColor.GRAY + "Please provide a valid player to clear.");
+                return false;
+            }
         }
         if (args[1] == null || !category.contains(args[1])){
             player.sendMessage(ChatColor.GRAY + "Please provide a valid itemType to clear.");
@@ -121,6 +129,7 @@ public class Clear implements TabExecutor {
 
             List<String> tabComplete = new ArrayList<>();
             Bukkit.getOnlinePlayers().forEach(player -> tabComplete.add(player.getName()));
+            tabComplete.add("*");
 
             return tabComplete;
         }
