@@ -22,10 +22,15 @@ import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
 public class Clear implements TabExecutor {
+
+    private final List<String> category = Arrays.asList("blocks","armor","tools","items","*");
+    private final List<String> section = Arrays.asList("hotbar","inventory","armor","offhand","*");
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
@@ -90,45 +95,20 @@ public class Clear implements TabExecutor {
     /**Checks if the args needed are given or not. Returns true if everything is fine.*/
     private boolean checkForNull(String[] args, Player player) {
 
-        List<String> args1 = getArgs1();
-        List<String> args2 = getArgs2();
-
         if (args.length == 0 || args[0] == null || Bukkit.getPlayer(args[0]) == null){
             player.sendMessage(ChatColor.GRAY + "Please provide a valid player to clear.");
             return false;
         }
-        if (args[1] == null || !args1.contains(args[1])){
+        if (args[1] == null || !category.contains(args[1])){
             player.sendMessage(ChatColor.GRAY + "Please provide a valid itemType to clear.");
             return false;
         }
-        if (args[2] == null || !args2.contains(args[2])){
+        if (args[2] == null || !section.contains(args[2])){
             player.sendMessage(ChatColor.GRAY + "Please provide a valid place to clear.");
             return false;
         }
 
         return true;
-    }
-
-    /**Returns a list of the args[2] possibilities.*/
-    private List<String> getArgs2() {
-        List<String> toReturn = new ArrayList<>();
-        toReturn.add("hotbar");
-        toReturn.add("inventory");
-        toReturn.add("armor");
-        toReturn.add("offhand");
-        toReturn.add("*");
-        return toReturn;
-    }
-
-    /**Returns a list of the args[1] possibilities.*/
-    private List<String> getArgs1() {
-        List<String> toReturn = new ArrayList<>();
-        toReturn.add("blocks");
-        toReturn.add("armor");
-        toReturn.add("tools");
-        toReturn.add("items");
-        toReturn.add("*");
-        return toReturn;
     }
 
     @Override
@@ -145,26 +125,10 @@ public class Clear implements TabExecutor {
             return tabComplete;
         }
         else if(args.length == 2){
-
-            List<String> tabComplete = new ArrayList<>();
-            tabComplete.add("blocks");
-            tabComplete.add("armor");
-            tabComplete.add("tools");
-            tabComplete.add("items");
-            tabComplete.add("*");
-
-            return tabComplete;
+            return category;
         }
         else if (args.length == 3) {
-
-            List<String> tabComplete = new ArrayList<>();
-            tabComplete.add("hotbar");
-            tabComplete.add("inventory");
-            tabComplete.add("armor");
-            tabComplete.add("offhand");
-            tabComplete.add("*");
-
-            return tabComplete;
+            return section;
         }
 
         return null;
