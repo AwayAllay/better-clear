@@ -1,5 +1,6 @@
 [![Latest Version](https://img.shields.io/github/v/release/AwayAllay/better-clear?label=latest)](https://github.com/AwayAllay/better-clear/releases)
 
+
 # better-clear
 **BetterClear** is a Minecraft plugin that enhances the vanilla `/clear` command,
 allowing administrators to clear players' inventories with precision by category
@@ -24,7 +25,7 @@ allowing administrators to clear players' inventories with precision by category
 
 ## Installation
 
-1. Download the latest version of the plugin from [SpigotMC]() or from [GitHub](https://github.com/AwayAllay/better-clear/releases).
+1. Download the latest version of the plugin from [SpigotMC](https://www.spigotmc.org/resources/better-clear.120300/) or from [GitHub](https://github.com/AwayAllay/better-clear/releases).
 2. Move the `.jar` file into your server's `/plugins` folder.
 3. Restart the server or load the plugin using `/reload`.
 
