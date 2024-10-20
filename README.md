@@ -1,3 +1,5 @@
+[![Latest Version](https://img.shields.io/github/v/release/AwayAllay/better-clear?label=latest)](https://github.com/AwayAllay/better-clear/releases)
+
 # better-clear
 **BetterClear** is a Minecraft plugin that enhances the vanilla `/clear` command,
 allowing administrators to clear players' inventories with precision by category
