@@ -58,8 +58,8 @@ public class Clear implements TabExecutor {
                     args[2].equalsIgnoreCase("hotbar")) {
                 return true;
             }
-            else if (player.hasPermission("betterclear.clear.armour") &&
-                    args[2].equalsIgnoreCase("armour")) {
+            else if (player.hasPermission("betterclear.clear.armor") &&
+                    args[2].equalsIgnoreCase("armor")) {
                 return true;
             }
             else if (player.hasPermission("betterclear.clear.inventory") &&
@@ -68,6 +68,10 @@ public class Clear implements TabExecutor {
             }
             else if (player.hasPermission("betterclear.clear.all") &&
                     args[2].equalsIgnoreCase("*")) {
+                return true;
+            }
+            else if (player.hasPermission("betterclear.clear.offhand") &&
+                    args[2].equalsIgnoreCase("offhand")) {
                 return true;
             }
             else {
@@ -110,7 +114,8 @@ public class Clear implements TabExecutor {
         List<String> toReturn = new ArrayList<>();
         toReturn.add("hotbar");
         toReturn.add("inventory");
-        toReturn.add("armour");
+        toReturn.add("armor");
+        toReturn.add("offhand");
         toReturn.add("*");
         return toReturn;
     }
@@ -119,7 +124,7 @@ public class Clear implements TabExecutor {
     private List<String> getArgs1() {
         List<String> toReturn = new ArrayList<>();
         toReturn.add("blocks");
-        toReturn.add("armour");
+        toReturn.add("armor");
         toReturn.add("tools");
         toReturn.add("items");
         toReturn.add("*");
@@ -143,7 +148,7 @@ public class Clear implements TabExecutor {
 
             List<String> tabComplete = new ArrayList<>();
             tabComplete.add("blocks");
-            tabComplete.add("armour");
+            tabComplete.add("armor");
             tabComplete.add("tools");
             tabComplete.add("items");
             tabComplete.add("*");
@@ -155,7 +160,8 @@ public class Clear implements TabExecutor {
             List<String> tabComplete = new ArrayList<>();
             tabComplete.add("hotbar");
             tabComplete.add("inventory");
-            tabComplete.add("armour");
+            tabComplete.add("armor");
+            tabComplete.add("offhand");
             tabComplete.add("*");
 
             return tabComplete;

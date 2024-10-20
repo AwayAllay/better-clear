@@ -25,8 +25,9 @@ import java.util.List;
 enum SLOTS{
     HOTBAR(Arrays.asList(0,1,2,3,4,5,6,7,8)),
     INVENTORY(Arrays.asList(9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35)),
-    ARMOUR(Arrays.asList(36,37,38,39)),
-    ALL(Arrays.asList(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39));
+    ARMOR(Arrays.asList(36,37,38,39)),
+    OFFHAND(Arrays.asList(40)),
+    ALL(Arrays.asList(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40));
 
     private final List<Integer> slots;
 
@@ -41,7 +42,6 @@ enum SLOTS{
 
 public class ClearManager {
 
-    private final String[] args;
     private final Player sender;
     private final Player target;
     private final String typeToClear;
@@ -49,7 +49,6 @@ public class ClearManager {
     private List<Integer> slotsToClear;
 
     public ClearManager(String[] args, Player sender) {
-        this.args = args;
         this.sender = sender;
         this.target = Bukkit.getPlayer(args[0]);
         this.typeToClear = args[1];
@@ -64,8 +63,8 @@ public class ClearManager {
         if (typeToClear.equalsIgnoreCase("blocks")){
             clearBlocks();
         }
-        else if (typeToClear.equalsIgnoreCase("armour")) {
-            clearArmour();
+        else if (typeToClear.equalsIgnoreCase("armor")) {
+            clearArmor();
         }
         else if (typeToClear.equalsIgnoreCase("tools")){
             clearTools();
@@ -79,6 +78,7 @@ public class ClearManager {
         }
 
     }
+
 
     /**Clears all the items that are not armour, blocks or tools from the given slots.*/
     private void clearItems() {
@@ -122,7 +122,7 @@ public class ClearManager {
     }
 
     /**Clears all the armour from the given slots.*/
-    private void clearArmour() {
+    private void clearArmor() {
         slotsToClear.forEach(slot -> {
 
             ItemStack item = target.getInventory().getItem(slot);
@@ -170,8 +170,11 @@ public class ClearManager {
         else if (placeToClear.equalsIgnoreCase("inventory")) {
             return SLOTS.INVENTORY.getSlots();
         }
-        else if (placeToClear.equalsIgnoreCase("armour")) {
-            return SLOTS.ARMOUR.getSlots();
+        else if (placeToClear.equalsIgnoreCase("armor")) {
+            return SLOTS.ARMOR.getSlots();
+        }
+        else if (placeToClear.equalsIgnoreCase("offhand")) {
+            return SLOTS.OFFHAND.getSlots();
         }
         else {
             return SLOTS.ALL.getSlots();
