@@ -18,7 +18,7 @@ allowing administrators to clear players' inventories with precision by category
     - Armor Slots
     - Offhand
     - Everything  
-- **Testet versions**: 1.15 - 1-21
+- **Tested versions**: 1.15 - 1-21
 
 ## Installation
 
@@ -56,5 +56,5 @@ allowing administrators to clear players' inventories with precision by category
 If you can't find a version of this plugin that is working for your server:
 
 
-- Create an issue in the [Issues tab](https://github.com/AwayAllay/better-clear/issues) and i will fix it as soon as possible.
+- Create an issue in the [Issues tab](https://github.com/AwayAllay/better-clear/issues) and I will fix it as soon as possible.
 - If you are a developer you can also create a [Pull request](https://github.com/AwayAllay/better-clear/pulls).
