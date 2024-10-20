@@ -13,11 +13,14 @@ permissions:
   betterclear.clear.hotbar:
     description: Allows clearing other players' hotbars.
     default: op
-  betterclear.clear.armour:
-    description: Allows clearing other players' armour slots.
+  betterclear.clear.armor:
+    description: Allows clearing other players' armor slots.
     default: op
   betterclear.clear.inventory:
-    description: Allows clearing other players' inventory space (no hotbar or armour slots).
+    description: Allows clearing other players' main inventory space (no hotbar or armor slots).
+    default: op
+  betterclear.clear.offhand:
+    description: Allows clearing the other players' offhand.
     default: op
   betterclear.clear.all:
     description: Allows clearing other players' inventory completely.
