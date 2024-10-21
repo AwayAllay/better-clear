@@ -1,7 +1,6 @@
 
 package com.lukaos187.betterclear.util;
 
-import jdk.nashorn.internal.ir.SplitReturn;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
